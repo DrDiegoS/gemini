@@ -8,16 +8,16 @@ st.set_page_config(page_title="Gemini App", page_icon="🤖", layout="centered")
 st.title("💡 Gemini AI - App com Streamlit")
 st.write("Este app consome a API do Gemini (Google AI) para gerar conteúdo com IA.")
 
-# Campo para API Key (não armazenamos isso, apenas sessão)
-api_key = st.text_input("Insira sua API Key do Google AI", type="password")
+# Sua API Key fixa (atenção com segurança!)
+API_KEY = "AIzaSyByH3z3NfQ-hvUHOCV84ad0_QDIvrEX97w"
 
 # Campo para prompt do usuário
 prompt = st.text_area("Digite seu prompt:", "Explique como funciona a inteligência artificial em poucas palavras")
 
 # Botão para gerar resposta
 if st.button("Gerar Resposta"):
-    if not api_key:
-        st.error("Por favor, insira a sua API Key.")
+    if not prompt.strip():
+        st.error("Por favor, insira um prompt.")
     else:
         # Endpoint do Gemini
         url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
@@ -25,7 +25,7 @@ if st.button("Gerar Resposta"):
         # Cabeçalhos
         headers = {
             "Content-Type": "application/json",
-            "X-goog-api-key": api_key
+            "X-goog-api-key": API_KEY
         }
 
         # Payload
